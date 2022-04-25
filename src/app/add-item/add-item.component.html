@@ -1,0 +1,138 @@
+<div class="container mt-3">
+  <h2 class="mt-2 mb-2">Ajout d'un nouveau element</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label>Titre</label>
+          <input type="text" class="form-control" formControlName="titre"/>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label>Categorie</label>
+          <input type="text" class="form-control" formControlName="categorie" />
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label>Date de publication</label>
+          <input type="datetime" class="form-control" formControlName="datePub" />
+        </div>
+      </div>
+    </div>
+    <fieldset>
+      <legend>Image</legend>
+      <div class="row">
+        <div class="col-8">
+          <div class="form-group">
+            <label>URL</label>
+            <input type="text" class="form-control" formControlName="hrefImg" />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>Type</label>
+            <select  formControlName="typeImg" class="form-control">
+              <option value="jpeg">JPEG</option>
+              <option value="jpg">JPG</option>
+              <option value="gif">GIF</option>
+              <option value="png">PNG</option>
+              <option value="bmp">BMP</option>
+            </select>
+            <!--<input type="text" class="form-control" formControlName="typeImg" />-->
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>Taille</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="tailleImg"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Description</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              formControlName="altImg"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Contenu</legend>
+      <div class="row">
+        <div class="col-10">
+          <div class="form-group">
+            <label>URL</label>
+            <input type="text" class="form-control" formControlName="urlCont" />
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-group">
+            <label>Type</label>
+            <select  formControlName="typeCont" class="form-control">
+              <option value="text">TEXT</option>
+              <option value="src">SRC</option>
+            </select>
+            <!--<input
+              type="text"
+              class="form-control"
+              formControlName="typeCont"
+            />-->
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label>Contenu</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              formControlName="valCont"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Auteur</legend>
+      <div class="row">
+        <div class="col-3">
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" class="form-control" formControlName="nomAuth" />
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label>Mail</label>
+            <input
+              type="email"
+              class="form-control"
+              formControlName="mailAuth"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+            <label>URI</label>
+            <input type="text" class="form-control" formControlName="uriAuth" />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
+  </form>
+</div>

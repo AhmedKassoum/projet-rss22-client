@@ -1,0 +1,32 @@
+  <div class="container-fluid" id="main-container">
+    <div class="mt-5">
+      <table class="table table-striped w-100">
+        <thead>
+          <tr>
+            <th>Guid</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{ item.guid }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.date }}</td>
+            <td>
+              <div class="row-cols-2">
+                <a class="btn btn-sm">
+                  <i class="fa fa-solid fa-eye"></i>
+                </a>
+                <a class="btn btn-sm" (click)="onDeleteItem(item.guid)">
+                  <i class="fa fa-duotone fa-trash"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
