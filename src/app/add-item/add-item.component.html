@@ -4,21 +4,24 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <label>Titre</label>
-          <input type="text" class="form-control" formControlName="titre"/>
+          <label>Titre <strong>*</strong></label>
+          <input type="text" class="form-control" formControlName="titre" [ngClass]="{'is-valid':submitted && f['titre'].errors}"/>
+          <div *ngIf="submitted && f['titre'].errors" class="invalid-feedback">
+            <div *ngIf="f['titre'].errors['required']">Fullname is required</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
         <div class="form-group">
-          <label>Categorie</label>
+          <label>Categorie <strong>*</strong></label>
           <input type="text" class="form-control" formControlName="categorie" />
         </div>
       </div>
       <div class="col-4">
         <div class="form-group">
-          <label>Date</label>
+          <label>Date <strong>*</strong></label>
           <input type="datetime" class="form-control" formControlName="datePub" />
         </div>
       </div>
@@ -100,7 +103,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <label>Contenu</label>
+            <label>Contenu <strong>*</strong></label>
             <textarea
               class="form-control"
               rows="3"
@@ -115,7 +118,7 @@
       <div class="row">
         <div class="col-3">
           <div class="form-group">
-            <label>Nom</label>
+            <label>Nom <strong>*</strong></label>
             <input type="text" class="form-control" formControlName="nomAuth" />
           </div>
         </div>

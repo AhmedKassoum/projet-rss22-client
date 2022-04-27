@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { Auteur } from './auteur.dto';
@@ -14,18 +20,44 @@ import { Item } from './item.dto';
   styleUrls: ['./add-item.component.css'],
 })
 export class AddItemComponent implements OnInit {
-  formGroup: FormGroup;
-  submitted:boolean=false;
 
-  constructor(private fb: FormBuilder, private service: AppService, private router:Router) {}
+  formGroup: FormGroup /*= new FormGroup({
+    titre: new FormControl(''),
+    categorie: new FormControl(''),
+    datePub: new FormControl(''),
+    typeDate: new FormControl(''),
+    hrefImg: new FormControl(''),
+    typeImg: new FormControl(''),
+    tailleImg: new FormControl(0),
+    altImg: new FormControl(''),
+    urlCont: new FormControl(''),
+    typeCont: new FormControl(''),
+    valCont: new FormControl(''),
+    nomAuth: new FormControl(''),
+    mailAuth: new FormControl(''),
+    typeCreat: new FormControl(''),
+    uriAuth: new FormControl(''),
+  })*/;
+
+  submitted: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private service: AppService,
+    private router: Router
+  ) {}
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.formGroup.controls;
+  }
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
       titre: ['', Validators.required],
       categorie: ['', Validators.required],
       datePub: ['', Validators.required],
-      typeDate:['published',Validators.required],
-      hrefImg: ['', Validators.required],
+      typeDate: ['published', Validators.required],
+      hrefImg: [''],
       typeImg: ['jpg', Validators.required],
       tailleImg: [0],
       altImg: [''],
@@ -33,15 +65,17 @@ export class AddItemComponent implements OnInit {
       typeCont: ['text'],
       valCont: ['', Validators.required],
       nomAuth: ['', Validators.required],
-      mailAuth: ['', Validators.email],
-      typeCreat:['author'],
+      mailAuth: [''],
+      typeCreat: ['author'],
       uriAuth: [''],
     });
   }
 
-  get f() { return this.formGroup.controls; }
-
   onSubmit() {
+    this.submitted=true;
+    if(this.formGroup.invalid){
+      return ;
+    }
     let image: Image = new Image(
       this.formGroup.value.hrefImg,
       this.formGroup.value.typeImg,
@@ -70,45 +104,49 @@ export class AddItemComponent implements OnInit {
     );
 
     var o2x = require('object-to-xml');
-   
-    var xml={
-      item:{
-        '#':{
-          guid:Guid.newGuid(),
-          title:item.title,
-          category:{
-            '@':{
-              term:item.category
-            }
-          },
-          typeDate:item.date,
-          image:{
-            '@':{
-              alt:image.alt,
-              href:image.href,
-              length:image.lenght,
-              type:image.type
-            }
-          },
-          content : {
-            '@' : {
-              href : contenu.href,
-              type : contenu.type
-            },
-            '#' : contenu.content
-          },
-          typeCreat : {
-            '#' : {
-              name:auteur.name,
-              uri:auteur.uri,
-              email:auteur.mail
-            }
-          }
-        }
-      }
-    }
 
-    this.service.addItem(String(o2x(xml)),item.typeDate,item.typeCreat).subscribe(rep=>this.router.navigateByUrl("/"))
+    var xml = {
+      item: {
+        '#': {
+          guid: Guid.newGuid(),
+          title: item.title,
+          category: {
+            '@': {
+              term: item.category,
+            },
+          },
+          typeDate: item.date,
+          image: {
+            '@': {
+              alt: image.alt,
+              href: image.href,
+              length: image.lenght,
+              type: image.type,
+            },
+          },
+          content: {
+            '@': {
+              href: contenu.href,
+              type: contenu.type,
+            },
+            '#': contenu.content,
+          },
+          typeCreat: {
+            '#': {
+              name: auteur.name,
+              uri: auteur.uri,
+              email: auteur.mail,
+            },
+          },
+        },
+      },
+    };
+
+    console.log("ok")
+
+    this.service
+      .addItem(String(o2x(xml)), item.typeDate, item.typeCreat)
+      .subscribe((rep) => this.router.navigateByUrl('/'));
     //console.log(JSON.stringify(item));
   }
 }
