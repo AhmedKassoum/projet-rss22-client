@@ -15,9 +15,10 @@ export class AppService {
     return this.http.get(`${this.apiServiceUrl}/rss22/resume/xml`,{responseType:'text'});
   }
 
-  public addItem (item:string):Observable<string>{
-    const config = new HttpHeaders().set('Content-Type', 'text/xml')
-                                .set('Accept', 'text/xml')
+  public addItem (item:string,typeDate:string,typeCreat:string):Observable<string>{
+    const config = new HttpHeaders().set('Content-Type', 'text/xml').set('Accept', 'text/xml')
+    item=item.split('typeDate').join(typeDate)
+    item=item.split('typeCreat').join(typeCreat)
     return this.http.post(`${this.apiServiceUrl}/rss22/insert`,item,{headers:config,responseType:'text'});
   }
 

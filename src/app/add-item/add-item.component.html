@@ -16,10 +16,19 @@
           <input type="text" class="form-control" formControlName="categorie" />
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <div class="form-group">
-          <label>Date de publication</label>
+          <label>Date</label>
           <input type="datetime" class="form-control" formControlName="datePub" />
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          <label>Type date</label>
+          <select  formControlName="typeDate" class="form-control">
+            <option value="published">Publication</option>
+            <option value="updated">Mise à jour</option>
+          </select>
         </div>
       </div>
     </div>
@@ -85,11 +94,6 @@
               <option value="text">TEXT</option>
               <option value="src">SRC</option>
             </select>
-            <!--<input
-              type="text"
-              class="form-control"
-              formControlName="typeCont"
-            />-->
           </div>
         </div>
       </div>
@@ -107,7 +111,7 @@
       </div>
     </fieldset>
     <fieldset>
-      <legend>Auteur</legend>
+      <legend>Créateur</legend>
       <div class="row">
         <div class="col-3">
           <div class="form-group">
@@ -125,7 +129,16 @@
             />
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-2">
+          <div class="form-group">
+            <label>Type</label>
+            <select  formControlName="typeCreat" class="form-control">
+              <option value="author">Auteur</option>
+              <option value="contributor">Contributeur</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
           <div class="form-group">
             <label>URI</label>
             <input type="text" class="form-control" formControlName="uriAuth" />

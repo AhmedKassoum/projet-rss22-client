@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,15 +24,17 @@ export class AddItemComponent implements OnInit {
       titre: ['', Validators.required],
       categorie: ['', Validators.required],
       datePub: ['', Validators.required],
+      typeDate:['published',Validators.required],
       hrefImg: ['', Validators.required],
-      typeImg: ['', Validators.required],
+      typeImg: ['jpg', Validators.required],
       tailleImg: [0],
       altImg: [''],
       urlCont: [''],
-      typeCont: [''],
+      typeCont: ['text'],
       valCont: ['', Validators.required],
       nomAuth: ['', Validators.required],
-      mailAuth: ['', Validators.required],
+      mailAuth: ['', Validators.email],
+      typeCreat:['author'],
       uriAuth: [''],
     });
   }
@@ -60,7 +61,9 @@ export class AddItemComponent implements OnInit {
     let item: Item = new Item(
       this.formGroup.value.titre,
       this.formGroup.value.categorie,
-      this.formGroup.value.datePub
+      this.formGroup.value.datePub,
+      this.formGroup.value.typeDate,
+      this.formGroup.value.typeCreat
       /*image,
       contenu,
       auteur*/
@@ -78,7 +81,7 @@ export class AddItemComponent implements OnInit {
               term:item.category
             }
           },
-          published:item.published,
+          typeDate:item.date,
           image:{
             '@':{
               alt:image.alt,
@@ -94,7 +97,7 @@ export class AddItemComponent implements OnInit {
             },
             '#' : contenu.content
           },
-          author : {
+          typeCreat : {
             '#' : {
               name:auteur.name,
               uri:auteur.uri,
@@ -105,7 +108,7 @@ export class AddItemComponent implements OnInit {
       }
     }
 
-    this.service.addItem(String(o2x(xml))).subscribe(rep=>this.router.navigateByUrl("/"))
+    this.service.addItem(String(o2x(xml)),item.typeDate,item.typeCreat).subscribe(rep=>this.router.navigateByUrl("/"))
     //console.log(JSON.stringify(item));
   }
 }
