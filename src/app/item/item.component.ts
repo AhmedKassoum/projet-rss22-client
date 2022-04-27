@@ -12,10 +12,11 @@ import { AppService } from '../app.service';
 export class ItemComponent implements OnInit {
 
   items:any=null;
+  gui:string;
 
   constructor(/*private client:HttpClient*/ private service:AppService,private router:Router){}
   ngOnInit(): void {
-    this.getEmployees();
+    this.getItems();
   }
 
   parseXML(data:any) {  
@@ -42,22 +43,7 @@ export class ItemComponent implements OnInit {
     });  
   }  
 
-  public getEmployees():void{
-
-    /*this.client.get('http://localhost:8100/rss22/resume/xml',  
-      {  
-        headers: new HttpHeaders()  
-          .set('Content-Type', 'text/xml')  ,  
-        responseType: 'text'  
-      })  
-      .subscribe((data) => {  
-        var obj=new window.DOMParser().parseFromString(data, "text/xml");
-        this.parseXML(data).then((data)=>{this.items=data})
-      },
-      (err:HttpErrorResponse)=>{
-        console.log(err)
-      }); */
-    
+  public getItems():void{
     this.service.getItems().subscribe((resp)=>{
       this.parseXML(resp).then((data)=>{this.items=data})
     },
@@ -69,11 +55,14 @@ export class ItemComponent implements OnInit {
   public onDeleteItem(guid:string){
     this.service.deleteItem(guid).subscribe((resp)=>{
       alert("C'EST FAIT")
-      this.router.navigateByUrl("/")
+      this.getItems();
     },
     (err:HttpErrorResponse)=>{
       alert(err.message);
     })
   }
 
+  public onDetailsItem(guid:string){
+    this.router.navigateByUrl("/details/"+guid)
+  }
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { Auteur } from './auteur.dto';
 import { Contenu } from './content.dto';
+import { Guid } from './generate.guid';
 import { Image } from './image.dto';
 import { Item } from './item.dto';
 
@@ -70,7 +71,7 @@ export class AddItemComponent implements OnInit {
     var xml={
       item:{
         '#':{
-          guid:'d7f9e71a-5286-4921-b61d-f389007be6dc',
+          guid:Guid.newGuid(),
           title:item.title,
           category:{
             '@':{
