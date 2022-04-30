@@ -22,9 +22,7 @@ export class DetailsItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getItemByGuid(this.guid).subscribe((data) => {
-      this.item=this.parseXML(data);
-      //console.log(this.parseXML(data));
-      //console.log(this.item)
+      this.item = this.parseXML(data);
     });
   }
 
@@ -40,7 +38,7 @@ export class DetailsItemComponent implements OnInit {
     var image: IImage;
     var content: IContenu;
     var itemByGuid: IItem = {
-      guid:'',
+      guid: '',
       title: '',
       category: '',
     };
@@ -49,23 +47,22 @@ export class DetailsItemComponent implements OnInit {
       var obj = result.item;
 
       itemByGuid = {
-        guid:obj.guid[0],
-        title: obj.title[0],
+        guid: obj.guid?obj.guid[0]:undefined,
+        title: obj.title ? obj.title[0] : undefined,
         updated: obj.updated ? obj.updated[0] : undefined,
         published: obj.published ? obj.published[0] : undefined,
         category: obj.category[0].$.term,
-        content:obj.content[0]._,
-        href:obj.image?obj.image[0].$.href:undefined,
-        alt:obj.image?obj.image[0].$.alt:undefined,
-        auteur:obj.author[0].name ? obj.author[0].name[0] : undefined,
+        content: obj.content[0]._,
+        href: obj.image ? obj.image[0].$.href : undefined,
+        alt: obj.image ? obj.image[0].$.alt : undefined,
+        auteur: obj.author? obj.author[0].name[0] : undefined,
       };
-      console.log(obj.author)
 
-      if (obj.author) {
+      /*if (obj.author) {
         author = {
           name: obj.author[0].name ? obj.author[0].name[0] : undefined,
           mail: obj.author[0].email ? obj.author[0].email[0] : undefined,
-          uri: obj.author[0].uri ? obj.author[0].uri: undefined,
+          uri: obj.author[0].uri ? obj.author[0].uri : undefined,
         };
         //itemByGuid.author = author;
       }
@@ -87,7 +84,7 @@ export class DetailsItemComponent implements OnInit {
           type: obj.content[0].$.type,
         };
         //itemByGuid.content = content;
-      }
+      }*/
       //resolve(itemByGuid);
       //});
     });

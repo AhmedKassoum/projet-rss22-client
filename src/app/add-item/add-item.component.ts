@@ -1,11 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { Auteur } from './auteur.dto';
@@ -20,24 +15,7 @@ import { Item } from './item.dto';
   styleUrls: ['./add-item.component.css'],
 })
 export class AddItemComponent implements OnInit {
-
-  formGroup: FormGroup /*= new FormGroup({
-    titre: new FormControl(''),
-    categorie: new FormControl(''),
-    datePub: new FormControl(''),
-    typeDate: new FormControl(''),
-    hrefImg: new FormControl(''),
-    typeImg: new FormControl(''),
-    tailleImg: new FormControl(0),
-    altImg: new FormControl(''),
-    urlCont: new FormControl(''),
-    typeCont: new FormControl(''),
-    valCont: new FormControl(''),
-    nomAuth: new FormControl(''),
-    mailAuth: new FormControl(''),
-    typeCreat: new FormControl(''),
-    uriAuth: new FormControl(''),
-  })*/;
+  formGroup: FormGroup;
 
   submitted: boolean = false;
 
@@ -51,20 +29,23 @@ export class AddItemComponent implements OnInit {
     return this.formGroup.controls;
   }*/
 
-  get title(){
+  get title() {
     return this.formGroup.get('titre');
   }
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      titre: this.fb.control(null,Validators.required), /*['', Validators.required],*/
+      titre: this.fb.control(
+        null,
+        Validators.required
+      ) /*['', Validators.required],*/,
       categorie: ['', Validators.required],
       datePub: ['', Validators.required],
       typeDate: ['published', Validators.required],
-      hrefImg: [''],
+      hrefImg: ['', Validators.required],
       typeImg: ['jpg', Validators.required],
       tailleImg: [0],
-      altImg: [''],
+      altImg: ['', Validators.required],
       urlCont: [''],
       typeCont: ['text'],
       valCont: ['', Validators.required],
@@ -76,10 +57,10 @@ export class AddItemComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted=true;
+    this.submitted = true;
     console.log(this.formGroup);
-    if(this.formGroup.invalid){
-      return ;
+    if (this.formGroup.invalid) {
+      return;
     }
     let image: Image = new Image(
       this.formGroup.value.hrefImg,
@@ -147,11 +128,18 @@ export class AddItemComponent implements OnInit {
       },
     };
 
-    console.log("ok")
+    var alertify = require('alertifyjs');
 
     this.service
       .addItem(String(o2x(xml)), item.typeDate, item.typeCreat)
-      .subscribe((rep) => this.router.navigateByUrl('/'));
-    //console.log(JSON.stringify(item));
+      .subscribe(
+        (rep) => {
+          alertify.message('Ajout effectué avec succés');
+          this.router.navigateByUrl('/get');
+        },
+        (err: HttpErrorResponse) => {
+          alertify.error(err.message);
+        }
+      );
   }
 }

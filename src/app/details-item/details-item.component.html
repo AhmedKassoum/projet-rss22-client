@@ -1,10 +1,13 @@
-<div class=" container mt-5 ">
-    <h2 class="">{{item.title}}</h2>
-    <p><strong>(guid=<i>{{item.guid}}</i>)</strong></p>
-    <p><img [src]="item.href" [alt]="item.alt" /></p>
-    <p>{{item.category}}</p>
-    <p *ngIf="item.published">{{item.published}}</p>
-    <p *ngIf="item.updated">{{item.updated}}</p>
-    <p>{{item.content}}</p>
-    <p><strong>{{item.auteur}}</strong></p>
+<app-nav-bar></app-nav-bar>
+<div *ngIf="item">
+    <div class=" container mt-5 ">
+        <h2>{{item.title}}</h2>
+        <p><strong>(guid=<i>{{item.guid}}</i>)</strong></p>
+        <p><img [src]="item.href" [alt]="item.alt" /></p>
+        <p>{{item.category}}</p>
+        <p *ngIf="item.published">{{item.published}}</p>
+        <p *ngIf="item.updated">{{item.updated}}</p>
+        <p>{{item.content}}</p>
+        <p><strong>{{item.auteur}}</strong></p>
+    </div>
 </div>
