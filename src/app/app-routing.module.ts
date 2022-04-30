@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './add-item/add-item.component';
 import { DetailsItemComponent } from './details-item/details-item.component';
+import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
+  {path:'',component:HomeComponent},
   {
-    path: '',
+    path: 'get',
     component: ItemComponent,
   },
   { path: 'ajout', component: AddItemComponent },

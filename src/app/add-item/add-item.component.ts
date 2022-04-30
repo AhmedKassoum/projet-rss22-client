@@ -47,13 +47,17 @@ export class AddItemComponent implements OnInit {
     private router: Router
   ) {}
 
-  get f(): { [key: string]: AbstractControl } {
+  /*get f(): { [key: string]: AbstractControl } {
     return this.formGroup.controls;
+  }*/
+
+  get title(){
+    return this.formGroup.get('titre');
   }
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      titre: ['', Validators.required],
+      titre: this.fb.control(null,Validators.required), /*['', Validators.required],*/
       categorie: ['', Validators.required],
       datePub: ['', Validators.required],
       typeDate: ['published', Validators.required],
@@ -73,6 +77,7 @@ export class AddItemComponent implements OnInit {
 
   onSubmit() {
     this.submitted=true;
+    console.log(this.formGroup);
     if(this.formGroup.invalid){
       return ;
     }

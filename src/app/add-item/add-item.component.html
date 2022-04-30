@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div class="container mt-3">
   <h2 class="mt-2 mb-2">Ajout d'un nouveau element</h2>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
@@ -5,9 +6,16 @@
       <div class="col">
         <div class="form-group">
           <label>Titre <strong>*</strong></label>
-          <input type="text" class="form-control" formControlName="titre" [ngClass]="{'is-valid':submitted && f['titre'].errors}"/>
-          <div *ngIf="submitted && f['titre'].errors" class="invalid-feedback">
-            <div *ngIf="f['titre'].errors['required']">Fullname is required</div>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="titre"
+            [ngClass]="{
+              'invalid-input': submitted && formGroup.controls.titre.errors
+            }"
+          />
+          <div *ngIf="submitted && title?.errors" class="has-error">
+            <div *ngIf="title?.errors?.required">Le titre est obligatoire</div>
           </div>
         </div>
       </div>
@@ -22,13 +30,17 @@
       <div class="col-4">
         <div class="form-group">
           <label>Date <strong>*</strong></label>
-          <input type="datetime" class="form-control" formControlName="datePub" />
+          <input
+            type="datetime"
+            class="form-control"
+            formControlName="datePub"
+          />
         </div>
       </div>
       <div class="col-2">
         <div class="form-group">
           <label>Type date</label>
-          <select  formControlName="typeDate" class="form-control">
+          <select formControlName="typeDate" class="form-control">
             <option value="published">Publication</option>
             <option value="updated">Mise à jour</option>
           </select>
@@ -47,7 +59,7 @@
         <div class="col-2">
           <div class="form-group">
             <label>Type</label>
-            <select  formControlName="typeImg" class="form-control">
+            <select formControlName="typeImg" class="form-control">
               <option value="jpeg">JPEG</option>
               <option value="jpg">JPG</option>
               <option value="gif">GIF</option>
@@ -93,7 +105,7 @@
         <div class="col-2">
           <div class="form-group">
             <label>Type</label>
-            <select  formControlName="typeCont" class="form-control">
+            <select formControlName="typeCont" class="form-control">
               <option value="text">TEXT</option>
               <option value="src">SRC</option>
             </select>
@@ -135,7 +147,7 @@
         <div class="col-2">
           <div class="form-group">
             <label>Type</label>
-            <select  formControlName="typeCreat" class="form-control">
+            <select formControlName="typeCreat" class="form-control">
               <option value="author">Auteur</option>
               <option value="contributor">Contributeur</option>
             </select>

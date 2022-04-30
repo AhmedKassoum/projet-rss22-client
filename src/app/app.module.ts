@@ -9,9 +9,11 @@ import { ItemComponent } from './item/item.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsItemComponent } from './details-item/details-item.component';
+import { HomeComponent } from './home/home.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, ItemComponent, AddItemComponent, DetailsItemComponent],
+  declarations: [AppComponent, ItemComponent, AddItemComponent, DetailsItemComponent, HomeComponent, NavBarComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule,ReactiveFormsModule,FormsModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AppService {
   private apiServiceUrl=environment.apiBaseUrl;
+  static host:string='';
+  
 
   constructor(private http:HttpClient) { }
 

@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h1 class="text-center">Université de Rouen Normandie</h1>
+  <img
+    src="https://www.nae.fr/wp-content/uploads/2014/06/logo-univ-rouen-800x450.jpg"
+    width="200"
+    style="margin: 0px auto; display: block"
+  />
+  <h2 class="text-center">Master I GIL</h2>
+  <h2 class="text-center">Projet XML - RSS22</h2>
+  <div class="col-8" style="display: block; margin: 0px auto">
+    <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+      <div class="mb-3 mt-5">
+        <input
+          type="text"
+          class="form-control form-control-lg text-center"
+          id="exampleInputPassword1"
+          placeholder="Saisissez l'url du service rest"
+          formControlName="host"
+          [ngClass]="{
+            'invalid-input': submitted && fg.controls.host.errors
+          }"
+        />
+        <div *ngIf="submitted && host?.errors" class="has-error">
+          <div *ngIf="host?.errors?.required">Ce champs est obligatoire</div>
+        </div>
+      </div>
+      <!--<button type="submit" class="btn btn-primary">valider</button>-->
+    </form>
+  </div>
+</div>
