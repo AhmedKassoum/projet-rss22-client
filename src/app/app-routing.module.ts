@@ -6,9 +6,9 @@ import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  //{path:'',component:HomeComponent},
   {
-    path: 'get',
+    path: '',
     component: ItemComponent,
   },
   { path: 'ajout', component: AddItemComponent },

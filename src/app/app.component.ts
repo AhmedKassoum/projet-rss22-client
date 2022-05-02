@@ -11,7 +11,6 @@ export class AppComponent {
   title = 'rss-client';
   constructor(){
     //environment.apiBaseUrl="localhost:5555"
-    console.log(environment.apiBaseUrl)
   }
   
 }

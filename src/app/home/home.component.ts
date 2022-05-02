@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,7 +14,9 @@ export class HomeComponent implements OnInit {
   fg: FormGroup;
   submitted: boolean = false;
 
-  constructor(private formbuilder: FormBuilder, private route: Router) {}
+  public myHost:string;
+
+  constructor(private formbuilder: FormBuilder, private route: Router, private http:HttpClient) {}
 
   get host(){
     return this.fg.get('host');
@@ -23,6 +26,7 @@ export class HomeComponent implements OnInit {
     this.fg = this.formbuilder.group({
       host: this.formbuilder.control(null, Validators.required),
     });
+
   }
 
   onSubmit() {
@@ -30,14 +34,16 @@ export class HomeComponent implements OnInit {
     if(this.fg.invalid){
       return;
     }
-
-    
-
-    let apiBaseUrl:string=this.fg.value.host;
+  
+    let apiBaseUrl=this.fg.value.host;
 
     if(apiBaseUrl){
       environment.apiBaseUrl=apiBaseUrl;
-      AppService.host=apiBaseUrl;
+      /*console.log("dans home "+apiBaseUrl)
+      console.log(environment.apiBaseUrl)*/
+      /*this.http.get(`${apiBaseUrl}/rss22/resume/xml`, {
+        responseType: 'text',
+      })*/
       this.route.navigateByUrl("/get")
     }
 
