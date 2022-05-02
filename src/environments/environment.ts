@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8100',
+  apiBaseUrl: 'https://rss22-back.cleverapps.io',
 };
 
 /*
