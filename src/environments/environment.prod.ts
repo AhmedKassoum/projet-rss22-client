@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl:"localhost:8100"
+  apiBaseUrl: 'https://rss22-back.cleverapps.io',
 };
