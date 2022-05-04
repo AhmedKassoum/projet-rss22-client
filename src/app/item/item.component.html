@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div class="container-fluid" id="main-container">
-  <div class="mt-5">
+  <div *ngIf="items" class="mt-5">
     <table class="table table-striped w-100">
       <thead>
         <tr>
@@ -28,5 +28,14 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div 
+    *ngIf="!items"
+    class="alert alert-secondary col-6"
+    role="alert"
+    style="margin: auto; margin-top: 2rem; font-size: 18px;"
+  >
+    Aucun article trouvé sur cette url, veuillez retourner à la page d'acceuil
+    pour saisir une autre url
   </div>
 </div>

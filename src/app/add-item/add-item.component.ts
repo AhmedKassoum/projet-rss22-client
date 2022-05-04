@@ -134,7 +134,7 @@ export class AddItemComponent implements OnInit {
       .addItem(String(o2x(xml)), item.typeDate, item.typeCreat)
       .subscribe(
         (rep) => {
-          alertify.message('Ajout effectué avec succés');
+          alertify.success('Ajout effectué avec succés');
           this.router.navigateByUrl('/get');
         },
         (err: HttpErrorResponse) => {

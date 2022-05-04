@@ -18,7 +18,7 @@ export class ItemComponent implements OnInit {
   gui: string;
 
   constructor(
-    /*private client:HttpClient*/ private service: AppService,
+    private service: AppService,
     private router: Router
   ) {}
   ngOnInit(): void {
@@ -49,6 +49,7 @@ export class ItemComponent implements OnInit {
   }
 
   public getItems(): void {
+    let alertify = require('alertifyjs');
     this.service.getItems().subscribe(
       (resp) => {
         this.parseXML(resp).then((data) => {
@@ -56,7 +57,6 @@ export class ItemComponent implements OnInit {
         });
       },
       (err: HttpErrorResponse) => {
-        console.log(err);
       }
     );
   }
@@ -66,11 +66,11 @@ export class ItemComponent implements OnInit {
 
     this.service.deleteItem(guid).subscribe(
       (resp) => {
-        alertify.message('Suppression effectuez avec succés');
+        alertify.success('Suppression effectuez avec succés');
         this.getItems();
       },
       (err: HttpErrorResponse) => {
-        alertify.error(err.message)
+        alertify.error(err.message);
       }
     );
   }

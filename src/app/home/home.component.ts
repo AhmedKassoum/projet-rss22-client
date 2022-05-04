@@ -13,9 +13,13 @@ export class HomeComponent implements OnInit {
   fg: FormGroup;
   submitted: boolean = false;
 
-  constructor(private formbuilder: FormBuilder, private route: Router) {}
+  constructor(
+    private formbuilder: FormBuilder,
+    private route: Router,
+    private service: AppService
+  ) {}
 
-  get host(){
+  get host() {
     return this.fg.get('host');
   }
 
@@ -27,21 +31,18 @@ export class HomeComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    if(this.fg.invalid){
+    if (this.fg.invalid) {
       return;
     }
 
-    
+    let apiBaseUrl: string = this.fg.value.host;
 
-    let apiBaseUrl:string=this.fg.value.host;
+    console.log(environment.apiBaseUrl);
 
-    if(apiBaseUrl){
-      environment.apiBaseUrl=apiBaseUrl;
-      AppService.host=apiBaseUrl;
-      this.route.navigateByUrl("/get")
+    if (apiBaseUrl) {
+      this.service.setApiBaseUrl(apiBaseUrl);
+      localStorage.setItem('api', apiBaseUrl);
+      this.route.navigateByUrl('/get');
     }
-
-    
-    
   }
 }
