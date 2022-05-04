@@ -24,8 +24,8 @@ export class AppService implements OnInit{
       this.apiServiceUrl=localStorage.getItem("api");
     }
     else{
-      localStorage.setItem("api","http://localhost:8100")
-      this.apiServiceUrl="http://localhost:8100"
+      localStorage.setItem("api","https://rss22-back.cleverapps.io")
+      this.apiServiceUrl="https://rss22-back.cleverapps.io"
     }
    }
 
